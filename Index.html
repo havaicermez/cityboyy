@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silly Scan 😈</title>
+  <style>
+    body { margin:0; background:#000; color:#0f0; font-family:sans-serif; text-align:center; padding-top:40vh; }
+    button { font-size:3em; padding:20px 40px; background:#f00; color:white; border:none; border-radius:10px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <h1 style="font-size:4em;">Tap anywhere</h1>
+  <audio id="silly" loop>
+    <source src="cityboy.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById('silly');
+    // Try muted autoplay first (works reliably)
+    audio.muted = true;
+    audio.play().catch(() => {});
+
+    // On any click/tap → unmute + ensure play
+    document.body.addEventListener('click', () => {
+      audio.muted = false;
+      audio.play().catch(e => console.log("Play failed:", e));
+      // Optional: hide text or show meme image
+      document.body.innerHTML = '<h1 style="font-size:6em;color:#ff0;"></h1>';
+    }, {once: true}); // only first tap needed
+  </script>
+</body>
+</html>
